@@ -4,6 +4,10 @@ defmodule HttpMeta.Router do
   plug :match
   plug :dispatch
 
+  get "/" do
+    HttpMeta.Home.call(conn)
+  end
+
   get "/http/ip/" do
     HttpMeta.HTTPIP.call(conn, [])
   end
