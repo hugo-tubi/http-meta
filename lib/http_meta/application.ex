@@ -7,10 +7,12 @@ defmodule HttpMeta.Application do
 
   @impl true
   def start(_type, _args) do
+    sinfo = Application.get_env(:http_meta, HttpServer)
+
     children = [
       # Starts a worker by calling: HttpMeta.Worker.start_link(arg)
       # {HttpMeta.Worker, arg}
-      {Plug.Cowboy, scheme: :http, plug: HttpMeta.Router, options: [port: 4001]}
+      {Plug.Cowboy, scheme: :http, plug: HttpMeta.Router, options: [port: sinfo[:port]]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
